@@ -6,5 +6,5 @@ CONFIG -= qt
 SOURCES += \
         main.cpp
 
-INCLUDEPATH += "C:\Program Files\boost\boost_1_68_0"
-DEPENDPATH += "C:\Program Files\boost\boost_1_68_0"
+INCLUDEPATH += /usr/local/Cellar/boost/1.69.0_2/include
+DEPENDPATH += /usr/local/Cellar/boost/1.69.0_2/include

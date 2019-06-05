@@ -31,16 +31,6 @@ public:
     }
 };
 
-void slotTest1( int a )
-{
-  std::cout << "Test1 get " << a << std::endl;
-}
-
-void slotTest2( int a )
-{
-  std::cout << "Test2 get " << a << std::endl;
-}
-
 int main( int argc, char** argv )
 {
     Person man;
