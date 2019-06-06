@@ -3,33 +3,42 @@
 
 using namespace std;
 
-struct Point {
-
-    static Point NewCartesian(float x, float y) {
-        return {x, y};
-    }
-
-    static Point NewPoly(float r, float theta) {
-        return {r * cos(theta), r * sin(theta)};
-    }
-
-    friend ostream& operator<<(ostream& os, const Point& point) {
+struct Points {
+    friend ostream& operator << (ostream& os, const Points& point) {
         return os << "x:" << point.x_ << ", y:" << point.y_;
     }
 
-private:
-    Point(float x, float y): x_(x), y_(y) {}
+    Points(float x, float y): x_(x), y_(y) {}
 
     float x_;
     float y_;
 };
 
+struct PointsFactory {
+    virtual ~PointsFactory() = default;
+    virtual Points createPoints(float a, float b) = 0;
+};
+
+struct CartesianPointsFactory : PointsFactory {
+    Points createPoints(float a, float b) override {
+        return {a, b};
+    }
+};
+
+struct PolyPointsFactory : PointsFactory {
+    Points createPoints(float a, float b) override {
+        return {a * cos(b), a * sin(b)};
+    }
+};
+
+
 int main()
 {
-    cout << "Hello World!" << endl;
+    CartesianPointsFactory cfactory;
+    auto p = cfactory.createPoints(10,20);
 
-    auto p = Point::NewCartesian(10, 20);
-    auto p1 = Point::NewPoly(5, 3.14159f);
+    PolyPointsFactory pfactory;
+    auto p1 = pfactory.createPoints(2, 3.14159f);
 
     cout << p << endl;
     cout << p1 << endl;
